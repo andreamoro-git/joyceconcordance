@@ -1,0 +1,14 @@
+div { margin: 20px}
+.row {
+    margin-left: 20px;
+    display:block
+}
+.rown,rownp {
+    width: 10em;
+    text-align: right;
+    display:block;
+    float: left;
+}
+.rownp {
+    width: 30em;
+}
