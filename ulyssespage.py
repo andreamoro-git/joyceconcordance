@@ -92,9 +92,9 @@ class ulyssesPage (htmlPage):
                 html+= self.addEpLink(line,lines[line]) + "\n"
         elif self.episodeN > 0 :
             #string to search
-            start = self.epbounds[self.episodeN]
+            start = self.epbounds[self.episodeN-1]
             if episodeN<18 :
-                end = self.epbounds[self.episodeN+1]
+                end = self.epbounds[self.episodeN]
             else :
                 end = len(lines)-1
 

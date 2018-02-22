@@ -30,7 +30,7 @@ class htmlPage:
         tempstr+= ("<html>\n")
         tempstr+=  ("<head>\n")
         tempstr+= '<meta charset="UTF-8">\n'
-        tempstr+= '<link href="/css/ulysses.css" type="text/css" rel="stylesheet">\n'
+        tempstr+= '<link href="css/ulysses.css" type="text/css" rel="stylesheet">\n'
         tempstr+=  ("<title>" + self.title + "</title>\n")
         tempstr+=  ("</head>\n")
         tempstr+=  ("<body>\n")

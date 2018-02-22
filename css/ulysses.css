@@ -1,6 +1,6 @@
 div { margin: 20px}
 .row {
-    margin-left: 20px;
+    margin-left: 35em;
     display:block
 }
 .rown,rownp {
@@ -11,4 +11,5 @@ div { margin: 20px}
 }
 .rownp {
     width: 30em;
+    float: left;
 }
