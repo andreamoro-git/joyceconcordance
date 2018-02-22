@@ -14,7 +14,8 @@ class ulyssesPage (htmlPage):
     def __init__ (self,episodeN=0,word=""):
         htmlPage.__init__ (self, "Joyce's Ulysses concordance",
 			    "Joyce's Ulysses concordance")
-        textFile = open("/Users/moroa/Dropbox/misc/Ulysses/cgi-bin/4300-0.txt","r")
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        textFile = open(dir_path+"/4300-0.txt","r")
         self.lines = textFile.read().split("\n")
 
         try :
@@ -87,11 +88,6 @@ class ulyssesPage (htmlPage):
         html += "</form></div>\n"
 
         html += "<ul>\n"
-        
-        if self.casesens:
-            html+="aa"
-        else:
-            html+= str(self.casesens)
             
         for bound in range(18) :
           
@@ -103,10 +99,12 @@ class ulyssesPage (htmlPage):
             searchString = self.word
             if self.casesens :
                 foundLines = [lines.index(x) for x in lines if searchString in x]
+                notifystring = ' (case sensitive)'
             else :                
                 foundLines = [lines.index(x) for x in lines if searchString.lower() in x.lower()]
+                notifystring = ' (not case sensitive) '
                 
-            html+= "<h2>Word search: "+self.word+" ("+str(len(foundLines))+")</h2>"
+            html+= "<h2>Word search: "+self.word+" ("+str(len(foundLines))+") matches "+notifystring+"</h2>\n"
             for line in foundLines :
                 html+= self.addEpLink(line,lines[line]) + "\n"
         elif self.episodeN > 0 :
