@@ -32,6 +32,10 @@ class ulyssesPage (htmlPage):
             self.word = query['w'][0]
         else :
             self.word = word
+        if 'cs' in query :
+            self.casesens = query['cs'][0]
+        else : 
+            self.casesens = 0
 
 #        self.epbounds = list()
 #        for episode in range(18) :
@@ -70,14 +74,25 @@ class ulyssesPage (htmlPage):
     def generate_body (self):
         episodeN = self.episodeN
         lines = self.lines
+        if self.casesens :
+            checked = 'checked'
+        else:
+            checked = ''
 
         html = ""
         html += "<div>Word search:<form action ='ulyssespage.py'> \n"
         html += "<input type='text' name='w'> \n"
-        html += "<input type='submit' value='Submit' \n"
+        html += "<input type='checkbox' name='cs'" + checked +"> case sensitive \n"
+        html += "<input type='submit' value='Submit' > \n"
         html += "</form></div>\n"
 
         html += "<ul>\n"
+        
+        if self.casesens:
+            html+="aa"
+        else:
+            html+= str(self.casesens)
+            
         for bound in range(18) :
           
             html += "<li>Episode "+str(bound+1)+ " : "
@@ -86,7 +101,11 @@ class ulyssesPage (htmlPage):
 
         if self.episodeN == 0 and self.word != '':
             searchString = self.word
-            foundLines = [lines.index(x) for x in lines if searchString in x]
+            if self.casesens :
+                foundLines = [lines.index(x) for x in lines if searchString in x]
+            else :                
+                foundLines = [lines.index(x) for x in lines if searchString.lower() in x.lower()]
+                
             html+= "<h2>Word search: "+self.word+" ("+str(len(foundLines))+")</h2>"
             for line in foundLines :
                 html+= self.addEpLink(line,lines[line]) + "\n"
