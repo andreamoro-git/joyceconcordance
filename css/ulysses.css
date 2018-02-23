@@ -1,14 +1,28 @@
-div { margin: 20px}
+div { margin: 0}
 form { margin-bottom: 20px}
-.row {
-    margin-left: 20px;
+
+
+
+span.row{
+  display: inline-block;
+   height: auto;
+   text-align: left;
+   vertical-align: middle;
+
 }
-.rown,rownp {
-    width: 10em;
-    text-align: right;
-    color: grey;
-}
-.rownp {
-    width: 30em;
+span.rown, span.rownp {
+  color: Grey;
+  display: inline-block;
+ width: 80px;
+ margin-right: 1em;
+ height: auto;
+ text-align: right;;
+
+ vertical-align: middle;
+ float:left;
+ clear:both;
 }
 
+span.rownp {
+  width: 220px;
+}

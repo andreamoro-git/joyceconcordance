@@ -49,6 +49,7 @@ class ulyssesPage (htmlPage):
             "Hades","Aeolus","Lestrygonians","Scylla and Charybdis",
             "Wandering Rocks","Sirens","Cyclops","Nausicaa",
             "Oxen of the Sun","Circe","Eumaeus","Ithaca","Penelope"]
+        
     
     def findEpisode(self,row) :
         for ep in range(18) :
@@ -58,18 +59,28 @@ class ulyssesPage (htmlPage):
    
     def addEpLink(self,num,text="") :
         ep = self.findEpisode(num)
+        if text == '' :
+            text = '[ ]'
         rowtext = ""
-        rowtext += "<span class='rownp' id='row'" + str(num) + "'>  \n"
-        rowtext += "[<a href='?e="+str(ep)+"#row" + str(num)+ "'>"+str(num)+"</a>]\n"
-        rowtext += "("+self.epnames[ep]+")"
+        rowtext += "<div><span class='rownp' id='row'" + str(num) + "'>  \n"
+        rowtext += " ("+self.epnames[ep]+") "
+        rowtext += "[<a href='?e="+str(ep+1)+"#row" + str(num)+ "'>"+str(num)+"</a>]\n"
+
         rowtext += "</span>\n"
-        rowtext += '<span class="row">'+text+'</span><br />'
+        rowtext += '<span class="row">'+text+'</span></div>'
+        rowtext += "\n"
 
         return rowtext
     
     def addNameAnchor(self,num,text="") :
-        return('<span class="rown" id="row'+str(num)+'">['+str(num)+']</span>'
-           +'<span class="row">'+text+'</span><br />')
+        if text == '' :
+            text = '&nbsp;'
+        rowtext =  ""
+        rowtext += '<div><span class="rown" id="row'+str(num)+'">['+str(num)+']</span>'
+        rowtext += '<span class="row">'+text+'</span></div>'
+        rowtext += "\n"
+        
+        return rowtext
 
     def generate_body (self):
         episodeN = self.episodeN
