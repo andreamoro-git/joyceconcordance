@@ -1,15 +1,14 @@
 div { margin: 20px}
+form { margin-bottom: 20px}
 .row {
-    margin-left: 35em;
-    display:block
+    margin-left: 20px;
 }
 .rown,rownp {
     width: 10em;
     text-align: right;
-    display:block;
-    float: left;
+    color: grey;
 }
 .rownp {
     width: 30em;
-    float: left;
 }
+

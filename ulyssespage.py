@@ -55,17 +55,16 @@ class ulyssesPage (htmlPage):
             if row >= self.epbounds[ep]:
                 thisep= ep
         return thisep
-    
+   
     def addEpLink(self,num,text="") :
         ep = self.findEpisode(num)
-        
         rowtext = ""
         rowtext += "<span class='rownp' id='row'" + str(num) + "'>  \n"
         rowtext += "[<a href='?e="+str(ep)+"#row" + str(num)+ "'>"+str(num)+"</a>]\n"
         rowtext += "("+self.epnames[ep]+")"
         rowtext += "</span>\n"
         rowtext += '<span class="row">'+text+'</span><br />'
-        
+
         return rowtext
     
     def addNameAnchor(self,num,text="") :
@@ -81,19 +80,18 @@ class ulyssesPage (htmlPage):
             checked = ''
 
         html = ""
-        html += "<div>Word search:<form action ='ulyssespage.py'> \n"
-        html += "<input type='text' name='w'> \n"
-        html += "<input type='checkbox' name='cs'" + checked +"> case sensitive \n"
-        html += "<input type='submit' value='Submit' > \n"
-        html += "</form></div>\n"
-
-        html += "<ul>\n"
+        html += "<h2> Episodes text </h2><ol>\n"
             
         for bound in range(18) :
-          
-            html += "<li>Episode "+str(bound+1)+ " : "
+            html += "<li>"
             html += "<a href='?e="+str(bound+1)+"'> "+self.epnames[bound]+ "</a> \n"
-        html += "</ul>\n"
+        html += "</ol>\n"
+
+        html += "<h2>String search</h2><form action ='ulyssespage.py'> \n"
+        html += "<input type='text' name='w' value="+self.word+"> \n"
+        html += "<input type='checkbox' name='cs'" + checked +"> case sensitive \n"
+        html += "<input type='submit' value='Submit' > \n"
+        html += "</form>\n"
 
         if self.episodeN == 0 and self.word != '':
             searchString = self.word
@@ -104,11 +102,11 @@ class ulyssesPage (htmlPage):
                 foundLines = [lines.index(x) for x in lines if searchString.lower() in x.lower()]
                 notifystring = ' (not case sensitive) '
                 
-            html+= "<h2>Word search: "+self.word+" ("+str(len(foundLines))+") matches "+notifystring+"</h2>\n"
+            html+= "<h2>String search: "+self.word+" ("+str(len(foundLines))+" matches) "+notifystring+"</h2>\n"
             for line in foundLines :
                 html+= self.addEpLink(line,lines[line]) + "\n"
         elif self.episodeN > 0 :
-            #string to search
+            html+= "<h2>"+str(self.episodeN)+". "+self.epnames[self.episodeN-1]+"</h2>\n"
             start = self.epbounds[self.episodeN-1]
             if episodeN<18 :
                 end = self.epbounds[self.episodeN]
