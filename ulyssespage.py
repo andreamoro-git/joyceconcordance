@@ -57,14 +57,14 @@ class ulyssesPage (htmlPage):
                 thisep= ep
         return thisep
    
-    def addEpLink(self,num,text="") :
+    def addEpLink(self,num,text="",word="") :
         ep = self.findEpisode(num)
         if text == '' :
             text = '[ ]'
         rowtext = ""
         rowtext += "<div><span class='rownp' id='row'" + str(num) + "'>  \n"
         rowtext += " ("+self.epnames[ep]+") "
-        rowtext += "[<a href='?e="+str(ep+1)+"#row" + str(num)+ "'>"+str(num)+"</a>]\n"
+        rowtext += "[<a href='?w="+word+"&e="+str(ep+1)+"#row" + str(max(self.epbounds[ep],num-5))+ "'>"+str(num)+"</a>]\n"
 
         rowtext += "</span>\n"
         rowtext += '<span class="row">'+text+'</span></div>'
@@ -91,18 +91,20 @@ class ulyssesPage (htmlPage):
             checked = ''
 
         html = ""
-        html += "<h2> Episodes text </h2><ol>\n"
+        html += "<div id='list'><h2> Episodes text </h2><ol>\n"
             
         for bound in range(18) :
             html += "<li>"
             html += "<a href='?e="+str(bound+1)+"'> "+self.epnames[bound]+ "</a> \n"
-        html += "</ol>\n"
+        html += "</ol>\n</div>\n"
 
-        html += "<h2>String search</h2><form action ='ulyssespage.py'> \n"
+        html += "<div id='form'><h2>String search</h2><form action ='ulyssespage.py'> \n"
         html += "<input type='text' name='w' value="+self.word+"> \n"
         html += "<input type='checkbox' name='cs'" + checked +"> case sensitive \n"
-        html += "<input type='submit' value='Submit' > \n"
-        html += "</form>\n"
+        html += "<input type='submit' class='addlinks' value='Submit' > \n"
+        html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
+        html += "</p>\n</div>\n"
+        html += "<div id='text'>\n"
 
         if self.episodeN == 0 and self.word != '':
             searchString = self.word
@@ -115,7 +117,7 @@ class ulyssesPage (htmlPage):
                 
             html+= "<h2>String search: "+self.word+" ("+str(len(foundLines))+" matches) "+notifystring+"</h2>\n"
             for line in foundLines :
-                html+= self.addEpLink(line,lines[line]) + "\n"
+                html+= self.addEpLink(line,lines[line],self.word) + "\n"
         elif self.episodeN > 0 :
             html+= "<h2>"+str(self.episodeN)+". "+self.epnames[self.episodeN-1]+"</h2>\n"
             start = self.epbounds[self.episodeN-1]
@@ -127,6 +129,7 @@ class ulyssesPage (htmlPage):
             for lineN in range(start,end):
                 html+= self.addNameAnchor(lineN,lines[lineN]) + "\n"
 
+        html+= "</div>\n<div id='sandbox'> </div>\n"
         return html
 
 

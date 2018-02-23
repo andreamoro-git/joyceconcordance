@@ -27,14 +27,18 @@ class htmlPage:
         tempstr = ""
         tempstr+= "Content-type:text/html\r\n\r\n"
         tempstr+= '<!DOCTYPE html> \n <html lang="en">'
-        tempstr+= ("<html>\n")
-        tempstr+=  ("<head>\n")
+        tempstr+= "<html>\n"
+        tempstr+= "<head>\n"
         tempstr+= '<meta charset="UTF-8">\n'
         tempstr+= '<link href="/css/ulysses.css" type="text/css" rel="stylesheet">\n'
-        tempstr+=  ("<title>" + self.title + "</title>\n")
-        tempstr+=  ("</head>\n")
-        tempstr+=  ("<body>\n")
-        tempstr+=  ("<h1>" + self.heading + "</h1>\n")
+        tempstr+= "<title>" + self.title + "</title>\n"
+        tempstr+= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>'
+        tempstr+= "<script type='text/javascript' src='/js/linkwords.js'></script> \n"
+        tempstr+= '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">'+"\n"
+        tempstr+= '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">'+"\n"
+        tempstr+= "</head>\n"
+        tempstr+= "<body>\n"
+        tempstr+= "<h1>" + self.heading + "</h1>\n"
         return tempstr
 
     def generate_body (self):
@@ -47,8 +51,13 @@ class htmlPage:
 	#
 	# generate the footer for a page
 	#
-        tempstr =  ("</body>\n")
-        tempstr+=  ("</html>\n")
+        tempstr = ""
+        tempstr += "<div id='footer'>\n"
+        tempstr += "<p>Ulysses text from gutenberg.org</p>"
+        tempstr += "<p>By Andrea Moro, Vanderbilt University, "
+        tempstr += "<a href='mailto:andrea@andreamoro.net'>andrea at andreamoro dot net </a><<p>\n</div>\n"
+        tempstr +=  ("</body>\n")
+        tempstr +=  ("</html>\n")
         return tempstr
 
     def generate (self):

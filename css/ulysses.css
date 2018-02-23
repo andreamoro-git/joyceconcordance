@@ -1,7 +1,42 @@
+body {
+  background-color: aliceblue;
+  padding: 20px;
+  font-family: 'Raleway', serif;
+    font-size: 15px;
+  }
 div { margin: 0}
+div.footer {margin-top: 100px}
 form { margin-bottom: 20px}
 
+a { color: #6F7064}
+.row a {color: black}
 
+h1,h2,h3 {
+  font-family: 'Arvo', sans-serif;
+}
+#list {
+   float:left;
+   width: 300px;
+   display: inline-block;
+ }
+#text {clear:both;
+  margin-top: 40px;
+
+}
+#form {
+  display: inline-block;
+  margin-left:20px;
+  text-align: left;
+}
+#footer {
+  margin-top: 200px;
+}
+
+.highlight {
+  background-color: #FFD8D6;
+  border: 1px solid black;
+  padding: 0px 2px;
+}
 
 span.row{
   display: inline-block;
@@ -25,4 +60,16 @@ span.rown, span.rownp {
 
 span.rownp {
   width: 220px;
+}
+
+.addlinks {
+  padding: 2px 4px;
+  border: 1px solid Grey;
+  background-color: white;
+    font-weight: normal;
+}
+input[type=submit] {
+  padding: 2px 4px;
+  font-size: 15px;
+  font-weight: normal;
 }
