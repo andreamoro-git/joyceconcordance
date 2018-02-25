@@ -56,6 +56,14 @@ class htmlPage:
         tempstr += "<p>Ulysses text from gutenberg.org</p>"
         tempstr += "<p>By Andrea Moro, Vanderbilt University, "
         tempstr += "<a href='mailto:andrea@andreamoro.net'>andrea at andreamoro dot net </a><<p>\n</div>\n"
+	tempstr += '<!-- Global site tag (gtag.js) - Google Analytics -->
+                    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114689681-1"></script>
+                    <script>'
+	tempstr += "\n window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+		    gtag('config', 'UA-114689681-1'); \n
+		</script>"
         tempstr +=  ("</body>\n")
         tempstr +=  ("</html>\n")
         return tempstr
