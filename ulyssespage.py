@@ -102,7 +102,7 @@ class ulyssesPage (htmlPage):
         inputvalue = ' '
         if self.word != '' :
             inputvalue = 'value = "'+self.word+'">'
-        html += "<input type='text' name='w'"+inputvalue+"  \n"
+        html += "<input type='text' name='w'"+inputvalue+" > \n"
         html += "<input type='checkbox' name='cs'" + checked +"> case sensitive \n"
         html += "<input type='submit' class='addlinks' value='Submit' > \n"
         html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
