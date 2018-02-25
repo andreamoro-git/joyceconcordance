@@ -98,9 +98,11 @@ class ulyssesPage (htmlPage):
             html += "<a href='?e="+str(bound+1)+"'> "+self.epnames[bound]+ "</a> \n"
         html += "</ol>\n</div>\n"
 
-        html += "<div id='form'><h2>String search</h2><form action ='ulyssespage.py'> \n"
+        html += "<div id='form'>\n<h2>String search</h2>\n<form action ='ulyssespage.py'> \n"
+        inputvalue = ' '
         if self.word != '' :
-            html += "<input type='text' name='w' value="+self.word+"> \n"
+            inputvalue = 'value = "'+self.word+'">'
+        html += "<input type='text' name='w'"+inputvalue+"  \n"
         html += "<input type='checkbox' name='cs'" + checked +"> case sensitive \n"
         html += "<input type='submit' class='addlinks' value='Submit' > \n"
         html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
