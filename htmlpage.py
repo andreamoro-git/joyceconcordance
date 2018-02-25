@@ -13,6 +13,8 @@ Created on Wed Feb 21 16:51:23 2018
 #
 #  Class for generating HTML pages
 #
+# import google analytics code
+from gan import addga
 
 class htmlPage:
 
@@ -31,9 +33,7 @@ class htmlPage:
         tempstr+= "<head>\n"
         tempstr+= '<meta charset="UTF-8">\n'
         # add google analytics
-        exec(open("./gan.py").read())
-#        tempstr+= addga()
-
+        tempstr+= addga()
         tempstr+= '<link href="/css/ulysses.css" type="text/css" rel="stylesheet">\n'
         tempstr+= "<title>" + self.title + "</title>\n"
         tempstr+= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>'
