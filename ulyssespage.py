@@ -70,8 +70,7 @@ class ulyssesPage (htmlPage):
         if text == '' :
             text = '[ ]'
         rowtext = ""
-        rowtext += "<div><span class='rownp' id='row'" + str(num) + "'>  \n"
-        rowtext += " ("+self.epnames[ep]+") "
+        rowtext += "<div><span class='rown' id='row'" + str(num) + "'>  \n"
         rowtext += "[<a href='?w="+word+"&e="+str(ep+1)+"#row" + str(max(self.epbounds[ep],num-5))+ "'>"+str(num)+"</a>]\n"
 
         rowtext += "</span>\n"
@@ -113,7 +112,7 @@ class ulyssesPage (htmlPage):
         html += "<div id='form'>\n<h2>String search</h2>\n<form action ='ulyssespage.py'> \n"
         inputvalue = ' '
         if self.word != '' :
-            inputvalue = 'value = "'+self.word+'">'
+            inputvalue = 'value = "'+self.word+'"'
         html += "<input type='text' name='w'"+inputvalue+" > \n"
         html += " <input type='checkbox' name='cs'" + checked +"> case sensitive \n"
         html += " <input type='checkbox' name='ww'" + wwchecked +"> whole word \n"
@@ -123,6 +122,7 @@ class ulyssesPage (htmlPage):
         html += "</form>\n </div>\n"
         html += "<div id='text'>\n"
 
+        # word search
         if self.episodeN == 0 and self.word != '':
             searchString = self.word
             if self.casesens :
@@ -144,9 +144,19 @@ class ulyssesPage (htmlPage):
                         if not self.word.lower() in re.split("\W+",lines[fline].lower()) :
                               keepFoundLines.remove(fline)
                 foundLines = keepFoundLines
+            # display output
             html+= "<h2>String search: "+self.word+" - "+str(len(foundLines))+" matches "+notifystring+"</h2>\n"
+            
+            thisEpisode = -1
             for line in foundLines :
+                lineEpisode = self.findEpisode(line)
+                if lineEpisode > thisEpisode:
+                    html+= "<h3>"+self.epnames[lineEpisode]+"</h3>"
+                    thisEpisode = lineEpisode
+                    
                 html+= self.addEpLink(line,lines[line],self.word) + "\n"
+        
+        # display full episode
         elif self.episodeN > 0 :
             html+= "<h2>"+str(self.episodeN)+". "+self.epnames[self.episodeN-1]+"</h2>\n"
             start = self.epbounds[self.episodeN-1]
