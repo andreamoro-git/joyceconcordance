@@ -6,18 +6,18 @@ Created on Wed Feb 21 17:05:17 2018
 @author: moroa
 """
 from htmlpage import htmlPage
-import os
+import os,re
 import urllib.parse
 
 class ulyssesPage (htmlPage):
 
-    def __init__ (self,episodeN=0,word=""):
+    def __init__ (self,episodeN=0,word="",wholeword='on'):
         htmlPage.__init__ (self, "Joyce's Ulysses concordance",
 			    "Joyce's Ulysses concordance")
         dir_path = os.path.dirname(os.path.realpath(__file__))
         textFile = open(dir_path+"/4300-0.txt","r")
         self.lines = textFile.read().split("\n")
-
+        
         try :
             self.url = os.environ['QUERY_STRING']
             query = urllib.parse.parse_qs(self.url)
@@ -37,6 +37,13 @@ class ulyssesPage (htmlPage):
             self.casesens = query['cs'][0]
         else : 
             self.casesens = 0
+        self.wholeword = 'on'
+        if 'ww' in query :
+            self.wholeword = query['ww'][0]
+        else : 
+            self.wholeword = 'on'
+
+
 
 #        self.epbounds = list()
 #        for episode in range(18) :
@@ -52,6 +59,7 @@ class ulyssesPage (htmlPage):
         
     
     def findEpisode(self,row) :
+        thisep = 0
         for ep in range(18) :
             if row >= self.epbounds[ep]:
                 thisep= ep
@@ -84,13 +92,17 @@ class ulyssesPage (htmlPage):
 
     def generate_body (self):
         episodeN = self.episodeN
-        lines = self.lines
+        lines = self.lines[self.epbounds[0]:len(self.lines)]
         if self.casesens :
             checked = 'checked'
         else:
             checked = ''
+        if self.wholeword != 'off' :
+            wwchecked = 'checked'
+        else:
+            wwchecked = ''
 
-        html = ""
+        html = "--"
         html += "<div id='list'><h2> Episodes text </h2><ol>\n"
             
         for bound in range(18) :
@@ -102,8 +114,10 @@ class ulyssesPage (htmlPage):
         inputvalue = ' '
         if self.word != '' :
             inputvalue = 'value = "'+self.word+'">'
-        html += "<input type='text' name='w'"+inputvalue+" > \n"
+        html += "<input type='text' name='w'"+inputvalue+"  \n"
         html += "<input type='checkbox' name='cs'" + checked +"> case sensitive \n"
+        html += "<input type='checkbox' name='ww'" + wwchecked +"> whole word \n"
+        html += "<input type='hidden' name='ww' value='off' >"
         html += "<input type='submit' class='addlinks' value='Submit' > \n"
         html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
         html += "</form>\n </div>\n"
@@ -113,12 +127,19 @@ class ulyssesPage (htmlPage):
             searchString = self.word
             if self.casesens :
                 foundLines = [lines.index(x) for x in lines if searchString in x]
-                notifystring = ' (case sensitive)'
+                notifystring = ' = case sensitive'
             else :                
                 foundLines = [lines.index(x) for x in lines if searchString.lower() in x.lower()]
-                notifystring = ' (not case sensitive) '
-                
-            html+= "<h2>String search: "+self.word+" ("+str(len(foundLines))+" matches) "+notifystring+"</h2>\n"
+                notifystring = ' - not case sensitive '
+            print(self.wholeword)
+            if self.wholeword == 'on':
+                notifystring +=  ' - whole word '
+                keepFoundLines = list(foundLines)
+                for fline in foundLines:
+                    if not self.word in re.split("\W+",lines[fline]) :
+                        keepFoundLines.remove(fline)
+                foundLines = keepFoundLines
+            html+= "<h2>String search: "+self.word+" - "+str(len(foundLines))+" matches "+notifystring+"</h2>\n"
             for line in foundLines :
                 html+= self.addEpLink(line,lines[line],self.word) + "\n"
         elif self.episodeN > 0 :

@@ -101,3 +101,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+css/.DS_Store
+css/.DS_Store
