@@ -114,9 +114,9 @@ class ulyssesPage (htmlPage):
         inputvalue = ' '
         if self.word != '' :
             inputvalue = 'value = "'+self.word+'">'
-        html += "<input type='text' name='w'"+inputvalue+"  \n"
-        html += "<input type='checkbox' name='cs'" + checked +"> case sensitive \n"
-        html += "<input type='checkbox' name='ww'" + wwchecked +"> whole word \n"
+        html += "<input type='text' name='w'"+inputvalue+" > \n"
+        html += " <input type='checkbox' name='cs'" + checked +"> case sensitive \n"
+        html += " <input type='checkbox' name='ww'" + wwchecked +"> whole word \n"
         html += "<input type='hidden' name='ww' value='off' >"
         html += "<input type='submit' class='addlinks' value='Submit' > \n"
         html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
@@ -127,7 +127,7 @@ class ulyssesPage (htmlPage):
             searchString = self.word
             if self.casesens :
                 foundLines = [lines.index(x) for x in lines if searchString in x]
-                notifystring = ' = case sensitive'
+                notifystring = ' - case sensitive'
             else :                
                 foundLines = [lines.index(x) for x in lines if searchString.lower() in x.lower()]
                 notifystring = ' - not case sensitive '
