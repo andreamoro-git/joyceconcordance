@@ -37,11 +37,11 @@ class ulyssesPage (htmlPage):
             self.casesens = query['cs'][0]
         else : 
             self.casesens = 0
-        self.wholeword = 'on'
         if 'ww' in query :
             self.wholeword = query['ww'][0]
         else : 
-            self.wholeword = 'on'
+            self.wholeword = wholeword
+
 
 
 
@@ -131,12 +131,18 @@ class ulyssesPage (htmlPage):
             else :                
                 foundLines = [lines.index(x) for x in lines if searchString.lower() in x.lower()]
                 notifystring = ' - not case sensitive '
+            
+            # remove instances where not the whole word
             if self.wholeword == 'on':
                 notifystring +=  ' - whole word '
                 keepFoundLines = list(foundLines)
                 for fline in foundLines:
-                    if not self.word in re.split("\W+",lines[fline]) :
-                        keepFoundLines.remove(fline)
+                    if self.casesens :
+                        if not self.word in re.split("\W+",lines[fline]) :
+                            keepFoundLines.remove(fline)
+                    else : 
+                        if not self.word.lower() in re.split("\W+",lines[fline].lower()) :
+                              keepFoundLines.remove(fline)
                 foundLines = keepFoundLines
             html+= "<h2>String search: "+self.word+" - "+str(len(foundLines))+" matches "+notifystring+"</h2>\n"
             for line in foundLines :
@@ -157,5 +163,5 @@ class ulyssesPage (htmlPage):
 
 
 if __name__ == "__main__":
-    p = ulyssesPage(episodeN=0,word='')
+    p = ulyssesPage(episodeN=0,word='kinch',wholeword='off')
     print(p.generate())
