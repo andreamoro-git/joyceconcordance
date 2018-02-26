@@ -70,7 +70,7 @@ class ulyssesPage (htmlPage):
         if text == '' :
             text = '[ ]'
         rowtext = ""
-        rowtext += "<div><span class='rown' id='row'" + str(num) + "'>  \n"
+        rowtext += "<div><span class='rown' id='row" + str(num) + "'>  \n"
         rowtext += "[<a href='?w="+word+"&e="+str(ep+1)+"#row" + str(max(self.epbounds[ep],num-5))+ "'>"+str(num)+"</a>]\n"
 
         rowtext += "</span>\n"
@@ -114,8 +114,8 @@ class ulyssesPage (htmlPage):
         if self.word != '' :
             inputvalue = 'value = "'+self.word+'"'
         html += "<input type='text' name='w'"+inputvalue+" > \n"
-        html += " <input type='checkbox' name='cs'" + checked +"> case sensitive \n"
-        html += " <input type='checkbox' name='ww'" + wwchecked +"> whole word \n"
+        html += " <input type='checkbox' name='cs' " + checked +"> case sensitive \n"
+        html += " <input type='checkbox' name='ww' " + wwchecked +"> whole word \n"
         html += "<input type='hidden' name='ww' value='off' >"
         html += "<input type='submit' class='addlinks' value='Submit' > \n"
         html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"

@@ -29,7 +29,7 @@ class htmlPage:
         tempstr = ""
         tempstr+= "Content-type:text/html\r\n\r\n"
         tempstr+= "<!DOCTYPE html> \n "
-        tempstr+= "<html>\n"
+        tempstr+= "<html lang='en'>\n"
         tempstr+= "<head>\n"
         tempstr+= '<meta charset="UTF-8">\n'
         # add google analytics
