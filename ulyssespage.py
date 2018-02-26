@@ -102,7 +102,7 @@ class ulyssesPage (htmlPage):
         else:
             wwchecked = ''
 
-        html = "--"
+        html = ""
         html += "<div id='list'><h2> Episodes text </h2><ol>\n"
             
         for bound in range(18) :
@@ -131,7 +131,6 @@ class ulyssesPage (htmlPage):
             else :                
                 foundLines = [lines.index(x) for x in lines if searchString.lower() in x.lower()]
                 notifystring = ' - not case sensitive '
-            print(self.wholeword)
             if self.wholeword == 'on':
                 notifystring +=  ' - whole word '
                 keepFoundLines = list(foundLines)
