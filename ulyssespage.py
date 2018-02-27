@@ -223,11 +223,15 @@ class ulyssesPage (htmlPage):
             for lineN in range(start,end):
                 html+= self.addNameAnchor(lineN,lines[lineN]) + "\n"
 
-        html+= "</div>\n<div id='sandbox'> </div>\n"
+        html+= "</div>\n<div id='sandbox'>"
+        if self.episodeN<18 : 
+            html+= "<a href='ulyssespage.py?e="+str(self.episodeN+1)
+            html+= "'>Next: "+str(self.episodeN+1)+". "+self.epnames[self.episodeN]+"</a>\n"
+        html+= "</div>\n"
         return html
 
 
 if __name__ == "__main__":
-    p = ulyssesPage(episodeN=1,word='',t="Joyce's Ulysses Concordance",
+    p = ulyssesPage(episodeN=17,word='',t="Joyce's Ulysses Concordance",
                     h="Joyce's Ulysses Concordance")
     print(p.generate())
