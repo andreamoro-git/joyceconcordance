@@ -113,7 +113,7 @@ class ulyssesPage (htmlPage):
         inputvalue = ' '
         if self.word != '' :
             inputvalue = 'value = "'+self.word+'"'
-        html += "<input type='text' name='w'"+inputvalue+" > \n"
+        html += "<input type='text' name='w' "+inputvalue+" > \n"
         html += " <input type='checkbox' name='cs' " + checked +"> case sensitive \n"
         html += " <input type='checkbox' name='ww' " + wwchecked +"> whole word \n"
         html += "<input type='hidden' name='ww' value='off' >"
@@ -151,7 +151,7 @@ class ulyssesPage (htmlPage):
             for line in foundLines :
                 lineEpisode = self.findEpisode(line)
                 if lineEpisode > thisEpisode:
-                    html+= "<h3>"+self.epnames[lineEpisode]+"</h3>"
+                    html+= "<h3>"+str(lineEpisode+1)+". "+self.epnames[lineEpisode]+"</h3>"
                     thisEpisode = lineEpisode
                     
                 html+= self.addEpLink(line,lines[line],self.word) + "\n"

@@ -34,6 +34,7 @@ class htmlPage:
         tempstr+= '<meta charset="UTF-8">\n'
         # add google analytics
         tempstr+= addga()
+        tempstr+= "<meta name='keywords' content='joyce ulysses concordance literature modernism'>\n"
         tempstr+= '<link href="/css/ulysses.css" type="text/css" rel="stylesheet">\n'
         tempstr+= "<title>" + self.title + "</title>\n"
         tempstr+= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>'

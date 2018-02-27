@@ -15,7 +15,7 @@ h1,h2,h3 {
   font-family: 'Arvo', sans-serif;
 }
 
-h3 { margin-left: 50px}
+h3 { margin-left: 66px}
 #list {
    float:left;
    width: 300px;
@@ -45,13 +45,13 @@ span.row{
    height: auto;
    text-align: left;
    vertical-align: middle;
+   margin-left: 16px;
 
 }
 span.rown, span.rownp {
   color: Grey;
   display: inline-block;
- width: 80px;
- margin-right: 1em;
+ width: 50px;
  height: auto;
  text-align: right;;
 
