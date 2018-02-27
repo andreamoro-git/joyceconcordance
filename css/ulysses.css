@@ -18,6 +18,7 @@ h1,h2,h3 {
 }
 
 h3 { margin-left: 50px}
+
 #list {
    float:left;
    width: 300px;
@@ -32,6 +33,7 @@ h3 { margin-left: 50px}
   margin-left:20px;
   text-align: left;
 }
+form {margin: 0 0 20px 20px}
 #footer {
   margin-top: 200px;
 }
@@ -76,4 +78,8 @@ input[type=submit] {
   padding: 2px 4px;
   font-size: 15px;
   font-weight: normal;
+  height: 26px;
+}
+input[type=text] {
+  height: 20px;
 }

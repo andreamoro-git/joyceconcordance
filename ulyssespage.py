@@ -11,9 +11,8 @@ import urllib.parse
 
 class ulyssesPage (htmlPage):
 
-    def __init__ (self,episodeN=0,word="",wholeword='on'):
-        htmlPage.__init__ (self, "Joyce's Ulysses concordance",
-			    "Joyce's Ulysses concordance")
+    def __init__ (self,episodeN=0,word="",wholeword='on',t='',h=''):
+        htmlPage.__init__ (self, t,h)
         dir_path = os.path.dirname(os.path.realpath(__file__))
         textFile = open(dir_path+"/4300-0.txt","r")
         self.lines = textFile.read().split("\n")
@@ -36,14 +35,11 @@ class ulyssesPage (htmlPage):
         if 'cs' in query :
             self.casesens = query['cs'][0]
         else : 
-            self.casesens = 0
+            self.casesens = 'off'
         if 'ww' in query :
             self.wholeword = query['ww'][0]
         else : 
             self.wholeword = wholeword
-
-
-
 
 #        self.epbounds = list()
 #        for episode in range(18) :
@@ -89,10 +85,19 @@ class ulyssesPage (htmlPage):
         
         return rowtext
 
-    def generate_body (self):
-        episodeN = self.episodeN
-        lines = self.lines[self.epbounds[0]:len(self.lines)]
-        if self.casesens :
+    def printEpisodeList(self) :
+        html = ""
+        html += "<div id='list'><h2> Episodes text </h2><ol>\n"
+            
+        for bound in range(18) :
+            html += "<li>"
+            html += "<a href='ulyssespage.py?e="+str(bound+1)+"'> "+self.epnames[bound]+ "</a> \n"
+        html += "</ol>\n</div>\n"
+        
+        return html
+    
+    def printForm(self) :
+        if self.casesens =='on' :
             checked = 'checked'
         else:
             checked = ''
@@ -100,16 +105,8 @@ class ulyssesPage (htmlPage):
             wwchecked = 'checked'
         else:
             wwchecked = ''
-
-        html = ""
-        html += "<div id='list'><h2> Episodes text </h2><ol>\n"
-            
-        for bound in range(18) :
-            html += "<li>"
-            html += "<a href='?e="+str(bound+1)+"'> "+self.epnames[bound]+ "</a> \n"
-        html += "</ol>\n</div>\n"
-
-        html += "<div id='form'>\n<h2>String search</h2>\n<form action ='ulyssespage.py'> \n"
+        html = ''
+        html += "<h2>String search</h2>\n<form action ='ulyssespage.py'> \n"
         inputvalue = ' '
         if self.word != '' :
             inputvalue = 'value = "'+self.word+'"'
@@ -119,13 +116,63 @@ class ulyssesPage (htmlPage):
         html += "<input type='hidden' name='ww' value='off' >"
         html += "<input type='submit' class='addlinks' value='Submit' > \n"
         html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
-        html += "</form>\n </div>\n"
+        html += "</form>\n "
+        
+        return html
+    
+    def printCountForm(self) :
+        if self.casesens=='on' :
+            checked = 'checked'
+        else:
+            checked = ''
+#        if self.wholeword != 'off' :
+#            wwchecked = 'checked'
+#        else:
+#            wwchecked = ''
+        html = ''
+        html += "<h2>Count words</h2>\n<form action ='ulyssescounts.py'> \n"
+        
+        #episode
+        html += '<select name="e">\n'
+        selected = ''
+        if self.episodeN == 0 :
+            selected = ' selected '
+        html+= '<option value="0" '+selected+' >All text</option>\n'
+        for ep in self.epnames :
+            selected = ''
+            if ep == self.epnames[self.episodeN-1] :
+                selected = ' selected '
+            html+= '<option value="'+str(self.epnames.index(ep)+1)+'" '+selected+' >'+ep+"</option>\n"
+        html += "</select>\n"
+        
+        #checkboxes
+        html += " <input type='checkbox' name='cs' " + checked +"> case sensitive \n"
+#        html += " <input type='checkbox' name='ww' " + wwchecked +" disabled> whole word \n"
+        html += "<input type='hidden' name='ww' value='off' >"
+        html += "<input type='submit' class='addlinks' value='Submit' > \n"
+        html += "</form>\n"
+        
+        return html
+
+    def generate_body (self):
+        episodeN = self.episodeN
+        lines = self.lines[self.epbounds[0]:len(self.lines)]
+
+        html = ""
+        
+        html+= self.printEpisodeList()
+        
+        html+= "<div id='form'>\n"
+        html+= self.printForm()
+        html+= self.printCountForm()
+        html+= "</div>\n"
+
         html += "<div id='text'>\n"
 
         # word search
         if self.episodeN == 0 and self.word != '':
             searchString = self.word
-            if self.casesens :
+            if self.casesens == 'on' :
                 foundLines = [lines.index(x) for x in lines if searchString in x]
                 notifystring = ' - case sensitive'
             else :                
@@ -137,7 +184,7 @@ class ulyssesPage (htmlPage):
                 notifystring +=  ' - whole word '
                 keepFoundLines = list(foundLines)
                 for fline in foundLines:
-                    if self.casesens :
+                    if self.casesens =='on' :
                         if not self.word in re.split("\W+",lines[fline]) :
                             keepFoundLines.remove(fline)
                     else : 
@@ -173,5 +220,6 @@ class ulyssesPage (htmlPage):
 
 
 if __name__ == "__main__":
-    p = ulyssesPage(episodeN=0,word='')
+    p = ulyssesPage(episodeN=0,word='',t="Joyce's Ulysses Concordance",
+                    h="Joyce's Ulysses Concordance")
     print(p.generate())

@@ -32,7 +32,10 @@ function addHighLight(wordq) {
 $(document).ready(function(){
 
   // check if this is a word search
-  var wordq = getQueryParams('w');
+  var wordq = '';
+  if (getQueryParams('w')) {
+    var wordq = getQueryParams('w');
+  }
 
   // add links on click
   $('#addlinks').click(function() {
@@ -42,13 +45,17 @@ $(document).ready(function(){
       var words = v.innerText.split(/\s+/);
       $(this).empty();
       $.each(words, function(ii,vv) {
+
         // extract word without punctuation
-        var wordonly = RegExp('\\w+','g').exec(vv)[0]
-        if (wordonly==wordq) {
-          $this.append("<span class='highlight'><a href='?w="+wordonly+"'>"+vv+"</a></span> ");
-        } else {
-          $this.append("<a href='?w="+wordonly+"'>"+vv+"</a> ");
-        }
+        var wordonly = RegExp('\\w+','g').exec(vv)
+        if (wordonly != null) {
+          wordonly = wordonly[0]
+          if (wordonly==wordq) {
+            $this.append("<span class='highlight'><a href='?w="+wordonly+"'>"+vv+"</a></span> ");
+          } else {
+            $this.append("<a href='?w="+wordonly+"'>"+vv+"</a> ");
+          }
+        };
       });
     });
   });
