@@ -1,3 +1,4 @@
+cache/*
 ./gan.py
 ./ga.html
 js/ga.js
