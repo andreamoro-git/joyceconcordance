@@ -232,6 +232,6 @@ class ulyssesPage (htmlPage):
 
 
 if __name__ == "__main__":
-    p = ulyssesPage(episodeN=17,word='',t="Joyce's Ulysses Concordance",
+    p = ulyssesPage(episodeN=0,word='',t="Joyce's Ulysses Concordance",
                     h="Joyce's Ulysses Concordance")
     print(p.generate())
