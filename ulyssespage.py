@@ -24,6 +24,7 @@ class ulyssesPage (htmlPage):
             query = list()
             print('')
 
+        self.episodeN = 0
         if 'e' in query :
             self.episodeN = int(query['e'][0])
         else :
@@ -137,10 +138,12 @@ class ulyssesPage (htmlPage):
         selected = ''
         if self.episodeN == 0 :
             selected = ' selected '
+        else :
+            selected = ' '
         html+= '<option value="0" '+selected+' >All text</option>\n'
         for ep in self.epnames :
             selected = ''
-            if ep == self.epnames[self.episodeN-1] :
+            if ( ep == self.epnames[self.episodeN-1] and self.episodeN>0 ) :
                 selected = ' selected '
             html+= '<option value="'+str(self.epnames.index(ep)+1)+'" '+selected+' >'+ep+"</option>\n"
         html += "</select>\n"
