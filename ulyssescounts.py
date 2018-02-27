@@ -12,7 +12,7 @@ import urllib.parse
 
 class ulyssesCountsPage (ulyssesPage):
 
-    def __init__ (self,episodeN=0):
+    def __init__ (self,episodeN=0,resetcache=0):
         ulyssesPage.__init__ (self,t= "Joyce's Ulysses word counts ",
 			    h="Joyce's Ulysses word counts")
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -34,6 +34,9 @@ class ulyssesCountsPage (ulyssesPage):
             self.casesens = query['cs'][0]
         else : 
             self.casesens = 'off'
+        self.resetcache = 0
+        if 'resetcache' in query :
+            self.resetcache = 1
 
 #    #Test case
 #        self.lines = list()
@@ -71,6 +74,15 @@ class ulyssesCountsPage (ulyssesPage):
         return (wcsort)
 
     def generate_body (self):
+
+        dir_path = os.path.dirname(os.path.realpath(__file__))+'/cache'        
+        # try to get from cache
+        if not self.resetcache :
+            try :
+                textFile = open(dir_path+"/count-e"+str(self.episodeN)+"-cs"+str(self.casesens),"r")
+                return textFile.read()+"<p style='font-size:10px'>(cached)</p>"
+            except :
+                1
         sortedLines = self.count(self.episodeN)
 
         html = ""
@@ -94,10 +106,16 @@ class ulyssesCountsPage (ulyssesPage):
                 html+= "<h3>"+str(count)+"</h3>"
             html+= "<a href='ulyssespage.py?cs="+str(self.casesens)+"&w="+line+"'>"+line+"</a>&nbsp;\n"
         html+= "</div>\n<div id='sandbox'> </div>\n"
+        
+        try:
+            textFile = open(dir_path+"/count-e"+str(self.episodeN)+"-cs"+str(self.casesens),"w")
+            textFile.write(html)
+        except :
+            1
         return html
 
 
 if __name__ == "__main__":
-    p = ulyssesCountsPage(episodeN=1)
+    p = ulyssesCountsPage(episodeN=0)
     print(p.generate())
  
