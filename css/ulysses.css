@@ -17,8 +17,12 @@ h1,h2,h3 {
   font-family: 'Arvo', sans-serif;
 }
 
+<<<<<<< HEAD
 h3 { margin-left: 50px}
 
+=======
+h3 { margin-left: 66px}
+>>>>>>> 50c167cf9f33ff53ad03945a81cc6a0e676cba0b
 #list {
    float:left;
    width: 300px;
@@ -49,13 +53,13 @@ span.row{
    height: auto;
    text-align: left;
    vertical-align: middle;
+   margin-left: 16px;
 
 }
 span.rown, span.rownp {
   color: Grey;
   display: inline-block;
- width: 80px;
- margin-right: 1em;
+ width: 50px;
  height: auto;
  text-align: right;;
 
