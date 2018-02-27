@@ -224,9 +224,10 @@ class ulyssesPage (htmlPage):
                 html+= self.addNameAnchor(lineN,lines[lineN]) + "\n"
 
         html+= "</div>\n<div id='sandbox'>"
-        if self.episodeN<18 : 
+        if self.episodeN>0 and self.episodeN<18 : 
             html+= "<a href='ulyssespage.py?e="+str(self.episodeN+1)
             html+= "'>Next: "+str(self.episodeN+1)+". "+self.epnames[self.episodeN]+"</a>\n"
+            html+= "<br><a href='#top'>(Top)</a>\n"
         html+= "</div>\n"
         return html
 
