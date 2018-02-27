@@ -5,7 +5,9 @@ body {
     font-size: 15px;
   }
 div { margin: 0}
-div.footer {margin-top: 100px}
+div.footer {
+  clear: both;
+  margin-top: 100px}
 form { margin-bottom: 20px}
 
 a { color: #6F7064}
