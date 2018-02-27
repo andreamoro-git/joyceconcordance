@@ -8,7 +8,6 @@ div { margin: 0}
 div.footer {
   clear: both;
   margin-top: 100px}
-form { margin-bottom: 20px}
 
 a { color: #6F7064}
 .row a {color: black}
@@ -33,7 +32,7 @@ h3 { margin-left: 66px}
   margin-left:20px;
   text-align: left;
 }
-form {margin: 0 0 20px 20px}
+form {margin: 0 0 40px 20px}
 #footer {
   margin-top: 200px;
 }
