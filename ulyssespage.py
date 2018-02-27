@@ -47,6 +47,7 @@ class ulyssesPage (htmlPage):
 #            searchString = '[ '+str(episode+1)+' ]'
 #            self.epbounds.append(lines.index(searchString))
 #        print(self.epbounds)
+        
         self.epbounds =  [6, 1119, 1781, 2412, 3154, 3894, 5357, 6987, 8596, 10310,
                              12120, 14068, 16635, 18129, 19852, 25261, 27531, 30613]
         self.epnames = ["Telemachus","Nestor","Proteus","Calypso","Lotus Eaters",
@@ -145,7 +146,8 @@ class ulyssesPage (htmlPage):
             selected = ''
             if ( ep == self.epnames[self.episodeN-1] and self.episodeN>0 ) :
                 selected = ' selected '
-            html+= '<option value="'+str(self.epnames.index(ep)+1)+'" '+selected+' >'+ep+"</option>\n"
+            html+= '<option value="'+str(self.epnames.index(ep)+1)+'" '+selected+' >'
+            html+= str(self.epnames.index(ep)+1)+'. '+ep+"</option>\n"
         html += "</select>\n"
         
         #checkboxes
@@ -159,7 +161,10 @@ class ulyssesPage (htmlPage):
 
     def generate_body (self):
         episodeN = self.episodeN
+        
+        # remove title and author
         lines = self.lines[self.epbounds[0]:len(self.lines)]
+        p.epbounds=[x - p.epbounds[0] for x in p.epbounds]
 
         html = ""
         
@@ -223,6 +228,6 @@ class ulyssesPage (htmlPage):
 
 
 if __name__ == "__main__":
-    p = ulyssesPage(episodeN=0,word='',t="Joyce's Ulysses Concordance",
+    p = ulyssesPage(episodeN=1,word='',t="Joyce's Ulysses Concordance",
                     h="Joyce's Ulysses Concordance")
     print(p.generate())
