@@ -43,7 +43,7 @@ class htmlPage:
         tempstr+= '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">'+"\n"
         tempstr+= "</head>\n"
         tempstr+= "<body>\n"
-        tempstr+= "<h1>" + self.heading + "</h1>\n"
+        tempstr+= "<h1>" + self.heading + "<img src='img/bloom.jpg' style= 'width: 100px'></h1>\n"
         return tempstr
 
     def generate_body (self):
