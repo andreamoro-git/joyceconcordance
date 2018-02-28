@@ -43,14 +43,17 @@ class ulyssesPage (htmlPage):
         else : 
             self.wholeword = wholeword
 
+        # uncomment this code to find episode bounds, later saved in self.epbounds
 #        self.epbounds = list()
 #        for episode in range(18) :
 #            searchString = '[ '+str(episode+1)+' ]'
-#            self.epbounds.append(lines.index(searchString))
+#            self.epbounds.append(self.lines.index(searchString))
+#        self.epbounds.append(self.lines.index('End of the Project Gutenberg EBook of Ulysses, by James Joyce'))
 #        print(self.epbounds)
+#        return 
         
-        self.epbounds =  [6, 1119, 1781, 2412, 3154, 3894, 5357, 6987, 8596, 10310,
-                             12120, 14068, 16635, 18129, 19852, 25261, 27531, 30613]
+        self.epbounds =  [43, 1156, 1818, 2449, 3191, 3931, 5394, 7024, 8633, 10347, 
+                          12157, 14105, 16672, 18166, 19889, 25298, 27568, 30650, 32354]
         self.epnames = ["Telemachus","Nestor","Proteus","Calypso","Lotus Eaters",
             "Hades","Aeolus","Lestrygonians","Scylla and Charybdis",
             "Wandering Rocks","Sirens","Cyclops","Nausicaa",
@@ -164,7 +167,7 @@ class ulyssesPage (htmlPage):
         episodeN = self.episodeN
         
         # remove title and author
-        lines = self.lines[self.epbounds[0]:len(self.lines)]
+        lines = self.lines[self.epbounds[0]:self.epbounds[18]]
         p.epbounds=[x - p.epbounds[0] for x in p.epbounds]
 
         html = ""
@@ -213,22 +216,19 @@ class ulyssesPage (htmlPage):
                 html+= self.addEpLink(line,lines[line],self.word) + "\n"
         
         # display full episode
-        elif self.episodeN > 0 :
-            html+= "<h2>"+str(self.episodeN)+". "+self.epnames[self.episodeN-1]+"</h2>\n"
-            start = self.epbounds[self.episodeN-1]
-            if episodeN<18 :
-                end = self.epbounds[self.episodeN]
-            else :
-                end = len(lines)-1
+        elif episodeN > 0 :
+            html+= "<h2>"+str(episodeN)+". "+self.epnames[episodeN-1]+"</h2>\n"
+            start = self.epbounds[episodeN-1]
+            end = self.epbounds[episodeN]
 
             for lineN in range(start,end):
                 html+= self.addNameAnchor(lineN,lines[lineN]) + "\n"
 
         html+= "</div>\n"
-        if self.episodeN<18 and self.episodeN>0: 
+        if episodeN<18 and episodeN>0: 
             html+= "<div id='sandbox'>\n"
-            html+= "<a href='ulyssespage.py?e="+str(self.episodeN+1)
-            html+= "'>Next: "+str(self.episodeN+1)+". "+self.epnames[self.episodeN]+"</a>\n"
+            html+= "<a href='ulyssespage.py?e="+str(episodeN+1)
+            html+= "'>Next: "+str(episodeN+1)+". "+self.epnames[episodeN]+"</a>\n"
             html+= "</div>\n"
 
         return html

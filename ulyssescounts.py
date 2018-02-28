@@ -59,12 +59,9 @@ class ulyssesCountsPage (ulyssesPage):
 
     
     def count(self,ep) :
-        if ep==18:
-            fromline = self.epbounds[17]
-            toline = len(self.lines)-1
-        elif ep==0:
+        if ep==0:
             fromline = self.epbounds[0]
-            toline = len(self.lines)-1
+            toline = self.epbounds[18]
         else :
             fromline = self.epbounds[ep-1]
             toline = self.epbounds[ep]
