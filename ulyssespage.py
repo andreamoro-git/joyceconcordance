@@ -116,7 +116,7 @@ class ulyssesPage (htmlPage):
         html += " <input type='checkbox' name='cs' " + checked +"> case sensitive \n"
         html += " <input type='checkbox' name='ww' " + wwchecked +"> whole word \n"
         html += "<input type='hidden' name='ww' value='off' >"
-        html += "<input type='submit' class='addlinks' value='Submit' > \n"
+        html += "<input type='submit' class='addlinks' value='Search' > \n"
         html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
         html += "</form>\n "
         
@@ -154,7 +154,7 @@ class ulyssesPage (htmlPage):
         html += " <input type='checkbox' name='cs' " + checked +"> case sensitive \n"
 #        html += " <input type='checkbox' name='ww' " + wwchecked +" disabled> whole word \n"
         html += "<input type='hidden' name='ww' value='off' >"
-        html += "<input type='submit' class='addlinks' value='Submit' > \n"
+        html += "<input type='submit' class='addlinks' value='Count' > \n"
         html += "</form>\n"
         
         return html
@@ -229,6 +229,7 @@ class ulyssesPage (htmlPage):
             html+= "<a href='ulyssespage.py?e="+str(self.episodeN+1)
             html+= "'>Next: "+str(self.episodeN+1)+". "+self.epnames[self.episodeN]+"</a>\n"
             html+= "</div>\n"
+
         return html
 
 

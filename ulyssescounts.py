@@ -105,7 +105,6 @@ class ulyssesCountsPage (ulyssesPage):
                 count = thiscount
                 html+= "<h3>"+str(count)+"</h3>"
             html+= "<a href='ulyssespage.py?cs="+str(self.casesens)+"&w="+line+"'>"+line+"</a>&nbsp;\n"
-        html+= "</div>\n<div id='sandbox'> </div>\n"
         
         try:
             textFile = open(dir_path+"/count-e"+str(self.episodeN)+"-cs"+str(self.casesens),"w")
