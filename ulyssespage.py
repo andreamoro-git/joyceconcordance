@@ -3,8 +3,9 @@
 """
 Created on Wed Feb 21 17:05:17 2018
 
-@author: moroa
+@author: Andrea Moro, andrea at andreamoro.net
 """
+
 from htmlpage import htmlPage
 import os,re
 import urllib.parse
