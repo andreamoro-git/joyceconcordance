@@ -3,19 +3,19 @@
 """
 Created on Wed Feb 21 16:51:23 2018
 
-@author: moroa
+@author: Andrea Moro, andrea at andreamoro.net
 @modified from http://www.tldp.org/LDP/LG/issue19/python.html
 """
 
+# this is how I import google analytics code
+try: 
+    from gan import addga
+except :
+    1
 
-
-#!/usr/bin/python
-#
 #  Class for generating HTML pages
 #
-# import google analytics code
-from gan import addga
-
+    
 class htmlPage:
 
     def __init__ (self, t="", h=""):
@@ -32,8 +32,13 @@ class htmlPage:
         tempstr+= "<html lang='en'>\n"
         tempstr+= "<head>\n"
         tempstr+= '<meta charset="UTF-8">\n'
+        
         # add google analytics
-        tempstr+= addga()
+        try :
+            tempstr+= addga()
+        except :
+            1
+        
         tempstr+= "<meta name='keywords' content='joyce ulysses concordance literature modernism'>\n"
         tempstr+= '<link href="/css/ulysses.css" type="text/css" rel="stylesheet">\n'
         tempstr+= "<title>" + self.title + "</title>\n"
@@ -43,7 +48,7 @@ class htmlPage:
         tempstr+= '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">'+"\n"
         tempstr+= "</head>\n"
         tempstr+= "<body>\n"
-        tempstr+= "<h1>" + self.heading +"</h1>\n"
+        tempstr+= "<h1>" + self.heading + "</h1>\n"
         return tempstr
 
     def generate_body (self):
