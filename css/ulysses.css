@@ -14,7 +14,12 @@ a { color: #6F7064}
 
 h1,h2,h3 {
   font-family: 'Arvo', sans-serif;
+
 }
+
+h1,h2,#footer,#sandbox {   background-color: #FFD8D6;
+  padding: 5px;
+  border: 1px solid black;}
 
 h3 { margin-left: 66px}
 
@@ -32,15 +37,23 @@ h3 { margin-left: 66px}
   margin-left:20px;
   text-align: left;
 }
-form {margin: 0 0 40px 20px}
+
 #footer {
   margin-top: 200px;
 }
+#sandbox {
+  margin-top: 20px;
+}
+form {margin: 0 0 40px 20px}
 
-.highlight {
+.highlight, .hl2 {
   background-color: #FFD8D6;
   border: 1px solid black;
   padding: 0px 2px;
+}
+
+.hl2 {
+  padding: 0;
 }
 
 span.row{

@@ -11,11 +11,16 @@ function getQueryParams(sParam) {
     }
   }
 }
-function addHighLight(wordq) {
 
+function addHighLight(wordq,ww) {
 
-  var highlightRe = /<span class="highlight">(.*?)<\/span>/g,
-    highlightHtml = '<span class="highlight">$1</span>';
+  if (ww == 'on') {
+    var highlightRe = /<span class="highlight">(.*?)<\/span>/g,
+      highlightHtml = '<span class="highlight">$1</span>';
+  } else {
+    var highlightRe = /<span class="hl2">(.*?)<\/span>/g,
+      highlightHtml = '<span class="hl2">$1</span>';
+  }
 
   var term = wordq
   var $allrows = $('span.row');
@@ -33,8 +38,12 @@ $(document).ready(function(){
 
   // check if this is a word search
   var wordq = '';
+  var ww = ''
   if (getQueryParams('w')) {
     var wordq = getQueryParams('w');
+  }
+  if (getQueryParams('ww')) {
+    var ww = getQueryParams('ww');
   }
 
   // add links on click
@@ -60,6 +69,6 @@ $(document).ready(function(){
     });
   });
 
-  addHighLight(wordq);
+  addHighLight(wordq,ww);
 
 });
