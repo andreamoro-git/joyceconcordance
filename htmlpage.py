@@ -66,7 +66,8 @@ class htmlPage:
         tempstr += "<p>Ulysses text from <a href='http://www.gutenberg.org/files/4300'>gutenberg.org</a>\n"
         tempstr += "(<a href='http://www.gutenberg.org/wiki/Gutenberg:The_Project_Gutenberg_License'>license</a>)</p>\n"
         tempstr += "<p>By <a href='http://andreamoro.net'>Andrea Moro</a>, Vanderbilt University, "
-        tempstr += "<a href='mailto:andrea@andreamoro.net'>andrea at andreamoro dot net </a></p>\n</div>\n"
+        tempstr += "<a href='mailto:andrea@andreamoro.net'>andrea at andreamoro dot net </a>"
+        tempstr += " - <a href='https://github.com/andreamoro-git/joyceconcordance'>Github code</a></p>\n</div>\n"
         tempstr +=  ("</body>\n")
         tempstr +=  ("</html>\n")
         return tempstr
