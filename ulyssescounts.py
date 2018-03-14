@@ -18,7 +18,7 @@ class ulyssesCountsPage (ulyssesPage):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         textFile = open(dir_path+"/4300-0.txt","r")
         self.lines = textFile.read().split("\n")
-        self.counts = dict()
+        self.counts = {}
         try :
             self.url = os.environ['QUERY_STRING']
             query = urllib.parse.parse_qs(self.url)
