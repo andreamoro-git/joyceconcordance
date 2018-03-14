@@ -203,8 +203,18 @@ class ulyssesPage (htmlPage):
                         if not self.word.lower() in re.split("\W+",lines[fline].lower()) :
                               keepFoundLines.remove(fline)
                 foundLines = keepFoundLines
+
+            #count hits
+            counthits = 0                
+            for fline in foundLines:
+                if self.casesens =='on' :
+                    counthits+= lines[fline].count(self.word)
+                else :
+                    counthits+= lines[fline].lower().count(self.word.lower())
+            
+             
             # display output
-            html+= "<h2>String search: "+self.word+" - "+str(len(foundLines))+" matches "+notifystring+"</h2>\n"
+            html+= "<h2>String search: "+self.word+" - "+str(counthits)+" matches "+notifystring+"</h2>\n"
             
             thisEpisode = -1
             for line in foundLines :
