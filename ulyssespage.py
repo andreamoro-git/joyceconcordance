@@ -17,7 +17,7 @@ class ulyssesPage (htmlPage):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         textFile = open(dir_path+"/4300-0.txt","r")
         self.lines = textFile.read().split("\n")
-        
+
         try :
             self.url = os.environ['QUERY_STRING']
             query = urllib.parse.parse_qs(self.url)
@@ -36,11 +36,11 @@ class ulyssesPage (htmlPage):
             self.word = word
         if 'cs' in query :
             self.casesens = query['cs'][0]
-        else : 
+        else :
             self.casesens = 'off'
         if 'ww' in query :
             self.wholeword = query['ww'][0]
-        else : 
+        else :
             self.wholeword = wholeword
 
         # uncomment this code to find episode bounds, later saved in self.epbounds
@@ -50,23 +50,23 @@ class ulyssesPage (htmlPage):
 #            self.epbounds.append(self.lines.index(searchString))
 #        self.epbounds.append(self.lines.index('End of the Project Gutenberg EBook of Ulysses, by James Joyce'))
 #        print(self.epbounds)
-#        return 
-        
-        self.epbounds =  [43, 1156, 1818, 2449, 3191, 3931, 5394, 7024, 8633, 10347, 
+#        return
+
+        self.epbounds =  [43, 1156, 1818, 2449, 3191, 3931, 5394, 7024, 8633, 10347,
                           12157, 14105, 16672, 18166, 19889, 25298, 27568, 30650, 32354]
         self.epnames = ["Telemachus","Nestor","Proteus","Calypso","Lotus Eaters",
             "Hades","Aeolus","Lestrygonians","Scylla and Charybdis",
             "Wandering Rocks","Sirens","Cyclops","Nausicaa",
             "Oxen of the Sun","Circe","Eumaeus","Ithaca","Penelope"]
-        
-    
+
+
     def findEpisode(self,row) :
         thisep = 0
         for ep in range(18) :
             if row >= self.epbounds[ep]:
                 thisep= ep
         return thisep
-   
+
     def addEpLink(self,num,text="",word="") :
         ep = self.findEpisode(num)
         if text == '' :
@@ -80,7 +80,7 @@ class ulyssesPage (htmlPage):
         rowtext += "\n"
 
         return rowtext
-    
+
     def addNameAnchor(self,num,text="") :
         if text == '' :
             text = '&nbsp;'
@@ -88,20 +88,20 @@ class ulyssesPage (htmlPage):
         rowtext += '<div><span class="rown" id="row'+str(num)+'">['+str(num)+']</span>'
         rowtext += '<span class="row">'+text+'</span></div>'
         rowtext += "\n"
-        
+
         return rowtext
 
     def printEpisodeList(self) :
         html = ""
         html += "<div id='list'><h2> Episodes text </h2><ol>\n"
-            
+
         for bound in range(18) :
             html += "<li>"
             html += "<a href='ulyssespage.py?e="+str(bound+1)+"'> "+self.epnames[bound]+ "</a> \n"
         html += "</ol>\n</div>\n"
-        
+
         return html
-    
+
     def printForm(self) :
         if self.casesens =='on' :
             checked = 'checked'
@@ -123,9 +123,9 @@ class ulyssesPage (htmlPage):
         html += "<input type='hidden' name='ww' value='off' >"
         html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
         html += "</form>\n "
-        
+
         return html
-    
+
     def printCountForm(self) :
         if self.casesens=='on' :
             checked = 'checked'
@@ -136,8 +136,8 @@ class ulyssesPage (htmlPage):
 #        else:
 #            wwchecked = ''
         html = ''
-        html += "<h2>Count words</h2>\n<form action ='ulyssescounts.py'> \n"
-        
+        html += "<h2>Words count</h2>\n<form action ='ulyssescounts.py'> \n"
+
         #episode
         html += '<select name="e">\n'
         selected = ''
@@ -153,27 +153,27 @@ class ulyssesPage (htmlPage):
             html+= '<option value="'+str(self.epnames.index(ep)+1)+'" '+selected+' >'
             html+= str(self.epnames.index(ep)+1)+'. '+ep+"</option>\n"
         html += "</select>\n"
-        
+
         #checkboxes
         html += " <input type='checkbox' name='cs' " + checked +"> case sensitive \n"
 #        html += " <input type='checkbox' name='ww' " + wwchecked +" disabled> whole word \n"
         html += "<input type='hidden' name='ww' value='off' >"
         html += "<input type='submit' class='addlinks' value='Count' > \n"
         html += "</form>\n"
-        
+
         return html
 
     def generate_body (self):
         episodeN = self.episodeN
-        
+
         # remove title and author
         lines = self.lines[self.epbounds[0]:self.epbounds[18]]
         p.epbounds=[x - p.epbounds[0] for x in p.epbounds]
 
         html = ""
-        
+
         html+= self.printEpisodeList()
-        
+
         html+= "<div id='form'>\n"
         html+= self.printForm()
         html+= self.printCountForm()
@@ -187,10 +187,10 @@ class ulyssesPage (htmlPage):
             if self.casesens == 'on' :
                 foundLines = [lines.index(x) for x in lines if searchString in x]
                 notifystring = ' - case sensitive'
-            else :                
+            else :
                 foundLines = [lines.index(x) for x in lines if searchString.lower() in x.lower()]
                 notifystring = ' - not case sensitive '
-            
+
             # remove instances where not the whole word
             if self.wholeword == 'on':
                 notifystring +=  ' - whole word '
@@ -199,32 +199,32 @@ class ulyssesPage (htmlPage):
                     if self.casesens =='on' :
                         if not self.word in re.split("\W+",lines[fline]) :
                             keepFoundLines.remove(fline)
-                    else : 
+                    else :
                         if not self.word.lower() in re.split("\W+",lines[fline].lower()) :
                               keepFoundLines.remove(fline)
                 foundLines = keepFoundLines
 
             #count hits
-            counthits = 0                
+            counthits = 0
             for fline in foundLines:
                 if self.casesens =='on' :
                     counthits+= lines[fline].count(self.word)
                 else :
                     counthits+= lines[fline].lower().count(self.word.lower())
-            
-             
+
+
             # display output
             html+= "<h2>String search: "+self.word+" - "+str(counthits)+" matches "+notifystring+"</h2>\n"
-            
+
             thisEpisode = -1
             for line in foundLines :
                 lineEpisode = self.findEpisode(line)
                 if lineEpisode > thisEpisode:
                     html+= "<h3>"+str(lineEpisode+1)+". "+self.epnames[lineEpisode]+"</h3>"
                     thisEpisode = lineEpisode
-                    
+
                 html+= self.addEpLink(line,lines[line],self.word) + "\n"
-        
+
         # display full episode
         elif episodeN > 0 :
             html+= "<h2>"+str(episodeN)+". "+self.epnames[episodeN-1]+"</h2>\n"
@@ -235,7 +235,7 @@ class ulyssesPage (htmlPage):
                 html+= self.addNameAnchor(lineN,lines[lineN]) + "\n"
 
         html+= "</div>\n"
-        if episodeN<18 and episodeN>0: 
+        if episodeN<18 and episodeN>0:
             html+= "<div id='sandbox'>\n"
             html+= "<a href='ulyssespage.py?e="+str(episodeN+1)
             html+= "'>Next: "+str(episodeN+1)+". "+self.epnames[episodeN]+"</a>\n"
