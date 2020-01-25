@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Feb 21 16:51:23 2018
-
 @author: Andrea Moro, andrea at andreamoro.net
 @modified from http://www.tldp.org/LDP/LG/issue19/python.html
+
 """
 
 # this is how I import google analytics code
