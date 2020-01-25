@@ -179,7 +179,6 @@ class ulyssesPage (htmlPage):
         html+= "</div>\n"
 
         html += "<div id='text'>\n"
-        html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
 
         # word search
         if self.episodeN == 0 and self.word != '':
@@ -215,6 +214,7 @@ class ulyssesPage (htmlPage):
 
             # display output
             html+= "<h2>String search: "+self.word+" - "+str(counthits)+" matches "+notifystring+"</h2>\n"
+            html+= "<p><span class='addlinks' id='addlinks'>Link every word</span></p> \n"
 
             thisEpisode = -1
             for line in foundLines :
@@ -228,6 +228,7 @@ class ulyssesPage (htmlPage):
         # display full episode
         elif episodeN > 0 :
             html+= "<h2>"+str(episodeN)+". "+self.epnames[episodeN-1]+"</h2>\n"
+            html+= "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
             start = self.epbounds[episodeN-1]
             end = self.epbounds[episodeN]
 
