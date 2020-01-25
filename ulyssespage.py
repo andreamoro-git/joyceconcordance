@@ -121,7 +121,6 @@ class ulyssesPage (htmlPage):
         html += " <input type='checkbox' name='cs' " + checked +"> case sensitive \n"
         html += " <input type='checkbox' name='ww' " + wwchecked +"> whole word \n"
         html += "<input type='hidden' name='ww' value='off' >"
-        html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
         html += "</form>\n "
 
         return html
@@ -180,6 +179,7 @@ class ulyssesPage (htmlPage):
         html+= "</div>\n"
 
         html += "<div id='text'>\n"
+        html += "<p><span class='addlinks' id='addlinks'>Link every word</span> (may take a few seconds)</p> \n"
 
         # word search
         if self.episodeN == 0 and self.word != '':
