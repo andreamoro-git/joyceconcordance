@@ -44,8 +44,8 @@ class htmlPage:
         tempstr+= "<title>" + self.title + "</title>\n"
         tempstr+= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>'
         tempstr+= "<script src='/js/linkwords.js'></script> \n"
-        tempstr+= '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">'+"\n"
-        tempstr+= '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">'+"\n"
+        tempstr+= '<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">'+"\n"
+        tempstr+= '<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway">'+"\n"
         tempstr+= "</head>\n"
         tempstr+= "<body>\n"
         tempstr+= "<h1>" + self.heading + "</h1>\n"
