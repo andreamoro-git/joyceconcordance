@@ -1,5 +1,5 @@
 # joyceconcordance
-Concordances in ulysses
+Concordances in ulysses: word counts and word search
 
 - internal rendering and form submission handling: python
 
