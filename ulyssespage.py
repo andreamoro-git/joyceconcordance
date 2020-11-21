@@ -174,8 +174,8 @@ class ulyssesPage (htmlPage):
         html+= self.printEpisodeList()
 
         html+= "<div id='form'>\n"
-        html+= self.printForm()
         html+= self.printCountForm()
+        html+= self.printForm()
         html+= "</div>\n"
 
         html += "<div id='text'>\n"

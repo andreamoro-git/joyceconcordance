@@ -5,7 +5,7 @@ body {
     font-size: 15px;
   }
 div { margin: 0}
-div.footer {
+div#footer {
   clear: both;
   margin-top: 100px}
 
@@ -38,9 +38,6 @@ h3 { margin-left: 66px}
   text-align: left;
 }
 
-#footer {
-  margin-top: 200px;
-}
 #sandbox {
   margin-top: 20px;
 }
