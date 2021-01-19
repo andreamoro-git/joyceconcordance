@@ -32,7 +32,7 @@ class ulyssesCountsPage (ulyssesPage):
             self.episodeN = episodeN
         if 'cs' in query :
             self.casesens = query['cs'][0]
-        else : 
+        else :
             self.casesens = 'off'
         self.resetcache = 0
         if 'resetcache' in query :
@@ -42,12 +42,12 @@ class ulyssesCountsPage (ulyssesPage):
 #        self.lines = list()
 #        self.lines.append("aaa aaa Aaa -bca dea aaa Introibo")
 #        self.epbounds[0] = 0
-        
+
     def word_count(self,string):
 
         if self.casesens == 'off':
             string = string.lower()
-    
+
         words = re.split("\W+",string)
 
         for word in words:
@@ -57,7 +57,7 @@ class ulyssesCountsPage (ulyssesPage):
                 self.counts[word] = 1
         return 1
 
-    
+
     def count(self,ep) :
         if ep==0:
             fromline = self.epbounds[0]
@@ -66,13 +66,13 @@ class ulyssesCountsPage (ulyssesPage):
             fromline = self.epbounds[ep-1]
             toline = self.epbounds[ep]
         for line in self.lines[fromline:toline-1]:
-            self.word_count(line) 
+            self.word_count(line)
         wcsort = sorted(self.counts,key=self.counts.__getitem__,reverse=True)
         return (wcsort)
 
     def generate_body (self):
 
-        dir_path = os.path.dirname(os.path.realpath(__file__))+'/cache'        
+        dir_path = os.path.dirname(os.path.realpath(__file__))+'/cache'
         # try to get from cache
         if not self.resetcache :
             try :
@@ -84,14 +84,14 @@ class ulyssesCountsPage (ulyssesPage):
 
         html = ""
         html += self.printEpisodeList()
-       
+
         html+= "<div id='form'>\n"
-        html+= self.printForm()
         html+= self.printCountForm()
+        html+= self.printForm()
         html+= "</div>\n"
-        
+
         html += "<div id='text'> "
-        html += "<h2> Word counts" 
+        html += "<h2> Word counts"
         if self.episodeN>0 :
             html+= ": "+self.epnames[self.episodeN-1]+" "
         html += "</h2>\n"
@@ -102,7 +102,7 @@ class ulyssesCountsPage (ulyssesPage):
                 count = thiscount
                 html+= "<h3>"+str(count)+"</h3>"
             html+= "<a href='ulyssespage.py?cs="+str(self.casesens)+"&w="+line+"'>"+line+"</a>&nbsp;\n"
-        
+
         try:
             textFile = open(dir_path+"/count-e"+str(self.episodeN)+"-cs"+str(self.casesens),"w")
             textFile.write(html)
@@ -112,6 +112,5 @@ class ulyssesCountsPage (ulyssesPage):
 
 
 if __name__ == "__main__":
-    p = ulyssesCountsPage(episodeN=0)
+    p = ulyssesCountsPage(episodeN=0,resetcache=1)
     print(p.generate())
- 
