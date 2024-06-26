@@ -1,8 +1,10 @@
+html {
+  font-size: 100% 
+  }
 body {
   background-color: aliceblue;
   padding: 20px;
   font-family: 'Raleway', serif;
-    font-size: 15px;
   }
 div { margin: 0}
 div#footer {
@@ -25,6 +27,7 @@ h3 { margin-left: 66px}
 
 #list {
    float:left;
+   margin-right:20px;
    width: 300px;
    display: inline-block;
  }
@@ -34,14 +37,15 @@ h3 { margin-left: 66px}
 }
 #form {
   display: inline-block;
-  margin-left:20px;
   text-align: left;
 }
 
 #sandbox {
   margin-top: 20px;
 }
-form {margin: 0 0 40px 20px}
+form {margin: 0 0 40px 20px;
+  line-height: 1.5rem;
+  }
 
 .highlight, .hl2 {
   background-color: #FFD8D6;
@@ -85,13 +89,12 @@ span.rownp {
 }
 input[type=submit] {
   padding: 2px 4px;
-  font-size: 15px;
   font-weight: normal;
-  height: 26px;
+  vertical-align: middle;
 }
 input[type=text] {
-  height: 20px;
-  padding-bottom: 0px
+/*  height: 26px; */
+  vertical-align: middle;
 }
 
 #sandbox {

@@ -11,7 +11,8 @@ Created on Wed Feb 21 16:51:23 2018
 try: 
     from gan import addga
 except :
-    1
+    def addga():
+        return ""
 
 #  Class for generating HTML pages
 #
@@ -40,6 +41,7 @@ class htmlPage:
             1
         
         tempstr+= "<meta name='keywords' content='joyce ulysses concordance literature modernism'>\n"
+        tempstr+= '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         tempstr+= '<link href="/css/ulysses.css" type="text/css" rel="stylesheet">\n'
         tempstr+= "<title>" + self.title + "</title>\n"
         tempstr+= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>'
