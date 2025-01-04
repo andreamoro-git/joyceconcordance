@@ -70,6 +70,8 @@ class htmlPage:
         tempstr += "<p>By <a href='http://andreamoro.net'>Andrea Moro</a>, Vanderbilt University, "
         tempstr += "<a href='mailto:andrea@andreamoro.net'>andrea at andreamoro dot net </a>"
         tempstr += " - <a href='https://github.com/andreamoro-git/joyceconcordance'>Github code</a></p>\n"
+        tempstr += "<p>If you use this resource for research or literary purposes, please consider citing its Zenodo entry:"
+        tempstr += ' <a href="https://doi.org/10.5281/zenodo.14598556"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.14598556.svg" style="vertical-align: top" alt="DOI"></a> </p>\n'
         tempstr += "<a href='https://litconcordance.andreamoro.net''>Other concordances</a></p>\n</div>\n"
         tempstr +=  ("</body>\n")
         tempstr +=  ("</html>\n")

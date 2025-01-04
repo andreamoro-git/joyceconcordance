@@ -16,7 +16,6 @@ a { color: #6F7064}
 
 h1,h2,h3 {
   font-family: 'Arvo', sans-serif;
-
 }
 
 h1,h2,#footer,#sandbox {   background-color: #CACCAC;
@@ -96,7 +95,6 @@ input[type=text] {
 /*  height: 26px; */
   vertical-align: middle;
 }
-
 #sandbox {
   margin: 30px 66px;
   }
